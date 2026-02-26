@@ -1,0 +1,54 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+### OS System Files ###
+.DS_Store
+Thumbs.db
+desktop.ini
+
+### Logs ###
+*.log
+logs/
+
+### Security & Environment Variables ###
+# NEVER commit your AI keys, JWT secrets, or DB passwords!
+.env
+*.env
+application-secret.yml
+application-secret.properties
+
+### Docker (Optional but good practice) ###
+# If you mount local folders for Postgres data, ignore them
+.docker/
+docker-data/
+pgdata/

@@ -1,4 +1,4 @@
-package com.fatihsengun.coachai;
+package com.fatihsengun.starter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

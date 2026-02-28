@@ -1,11 +1,12 @@
 package com.fatihsengun.controller;
 
 import com.fatihsengun.dto.*;
+import com.fatihsengun.entity.RootResponseEntity;
 
 public interface IRestAuthController {
-    public DtoRegister register(DtoRegisterUI dtoRegisterUI);
+    public RootResponseEntity<DtoRegister> register(DtoRegisterUI dtoRegisterUI);
 
-    public DtoAuthenticate authenticate(DtoAuthenticateUI dtoAuthenticateUI);
+    public RootResponseEntity<DtoAuthenticate> authenticate(DtoAuthenticateUI dtoAuthenticateUI);
 
-    public DtoRefreshToken refresh(DtoRefreshTokenUI dtoRefreshTokenUI);
+    public RootResponseEntity<DtoRefreshToken> refresh(DtoRefreshTokenUI dtoRefreshTokenUI);
 }

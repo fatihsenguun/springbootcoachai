@@ -1,0 +1,16 @@
+package com.fatihsengun.controller.impl;
+
+import com.fatihsengun.entity.RootResponseEntity;
+
+public class RestRootResponseController {
+
+
+    public <T> RootResponseEntity<T> ok(T payload) {
+        return RootResponseEntity.ok(payload);
+    }
+
+    public <T> RootResponseEntity<T> error(String error) {
+        return RootResponseEntity.error(error);
+    }
+
+}

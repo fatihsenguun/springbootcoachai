@@ -1,10 +1,12 @@
 package com.fatihsengun.service.impl;
 
 import com.fatihsengun.dto.*;
+import com.fatihsengun.entity.RefreshToken;
 import com.fatihsengun.entity.User;
 import com.fatihsengun.enums.RoleType;
 import com.fatihsengun.jwt.JwtService;
 import com.fatihsengun.mapper.IGlobalMapper;
+import com.fatihsengun.repository.RefreshTokenRepository;
 import com.fatihsengun.repository.UserRepository;
 import com.fatihsengun.service.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class AuthServiceImpl implements IAuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RefreshTokenServiceImpl refreshTokenService;
+
     @Override
     public DtoRegister register(DtoRegisterUI dtoRegisterUI) {
 
@@ -54,8 +59,8 @@ public class AuthServiceImpl implements IAuthService {
             User user = userRepository.findByEmail(dtoAuthenticateUI.getEmail())
                     .orElseThrow(() -> new RuntimeException("user not found"));
             String accessToken = jwtService.generateToken(user);
-
-            return new DtoAuthenticate(accessToken, null, user.getFirstName(), user.getLastName(), user.getRole());
+            RefreshToken refreshToken = refreshTokenService.saveRefreshToken(user);
+            return new DtoAuthenticate(accessToken, refreshToken.getRefreshToken(), user.getFirstName(), user.getLastName(), user.getRole());
 
         } catch (Exception e) {
             System.out.println("Username or password wrong");

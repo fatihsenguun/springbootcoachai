@@ -3,6 +3,7 @@ package com.fatihsengun.controller.impl;
 import com.fatihsengun.controller.IRestAuthController;
 import com.fatihsengun.dto.*;
 import com.fatihsengun.service.impl.AuthServiceImpl;
+import com.fatihsengun.service.impl.RefreshTokenServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,9 @@ public class RestAuthControllerImpl implements IRestAuthController {
     @Autowired
     private AuthServiceImpl authService;
 
+    @Autowired
+    private RefreshTokenServiceImpl refreshTokenService;
+
     @Override
     @PostMapping("/register")
     public DtoRegister register(@Valid @RequestBody DtoRegisterUI authRequest) {
@@ -25,5 +29,12 @@ public class RestAuthControllerImpl implements IRestAuthController {
     @PostMapping("/authenticate")
     public DtoAuthenticate authenticate(@Valid @RequestBody DtoAuthenticateUI dtoAuthenticateUI) {
         return authService.authenticate(dtoAuthenticateUI);
+    }
+
+    @Override
+    @PostMapping("refresh_token")
+    public DtoRefreshToken refresh(@RequestBody DtoRefreshTokenUI dtoRefreshTokenUI) {
+
+        return refreshTokenService.refreshToken(dtoRefreshTokenUI);
     }
 }

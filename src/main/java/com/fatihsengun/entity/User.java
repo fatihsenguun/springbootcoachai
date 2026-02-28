@@ -29,7 +29,9 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    private String fullName;
+    private String firstName;
+
+    private String lastName;
 
     @Enumerated(EnumType.STRING)
     private RoleType role;

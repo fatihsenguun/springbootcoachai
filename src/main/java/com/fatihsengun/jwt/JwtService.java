@@ -23,7 +23,7 @@ public class JwtService {
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 2))
-                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .signWith(getKey())
                 .compact();
     }
 
@@ -36,7 +36,7 @@ public class JwtService {
         final Claims claims = Jwts.parser()
                 .verifyWith((SecretKey) getKey())
                 .build()
-                .parseEncryptedClaims(token)
+                .parseSignedClaims(token)
                 .getPayload();
         return claimsFunction.apply(claims);
     }

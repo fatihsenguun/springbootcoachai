@@ -38,6 +38,7 @@ public class AppConfig {
         return authenticationProvider;
     }
 
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

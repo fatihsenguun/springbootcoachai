@@ -1,5 +1,6 @@
 package com.fatihsengun.mapper;
 
+import com.fatihsengun.dto.DtoRegister;
 import com.fatihsengun.dto.DtoUser;
 import com.fatihsengun.entity.User;
 import org.mapstruct.Mapper;
@@ -7,6 +8,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface IGlobalMapper {
 
-    DtoUser toDtoUser(User user);
+    DtoRegister toDtoRegister(User user);
 
 }

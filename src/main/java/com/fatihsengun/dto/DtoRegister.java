@@ -2,22 +2,24 @@ package com.fatihsengun.dto;
 
 import com.fatihsengun.entity.BaseEntity;
 import com.fatihsengun.enums.RoleType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DtoUser extends BaseEntity {
-
-    private String email;
+public class DtoRegister extends BaseEntity {
 
     private String firstName;
 
     private String lastName;
 
+    private String email;
+
     private RoleType role;
+
+
 }

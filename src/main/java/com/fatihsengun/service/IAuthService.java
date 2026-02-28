@@ -1,8 +1,10 @@
-package com.fatihsengun.controller;
+package com.fatihsengun.service;
+
 
 import com.fatihsengun.dto.DtoUser;
 import com.fatihsengun.jwt.AuthRequest;
 
-public interface IRestAuthController {
+public interface IAuthService {
+
     public DtoUser register(AuthRequest authRequest);
 }

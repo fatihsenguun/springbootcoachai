@@ -6,16 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class DtoWorkoutSessionUI {
-    private WorkoutProgram workoutProgram;
 
     private Integer dayNumber;
 
     private String name;
 
-    private boolean isCompleted;
+    private List<DtoExerciseUI> exercises;
 }

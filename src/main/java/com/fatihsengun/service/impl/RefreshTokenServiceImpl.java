@@ -4,6 +4,9 @@ import com.fatihsengun.dto.DtoRefreshToken;
 import com.fatihsengun.dto.DtoRefreshTokenUI;
 import com.fatihsengun.entity.RefreshToken;
 import com.fatihsengun.entity.User;
+import com.fatihsengun.exception.BaseException;
+import com.fatihsengun.exception.ErrorMessage;
+import com.fatihsengun.exception.MessageType;
 import com.fatihsengun.jwt.JwtService;
 import com.fatihsengun.repository.RefreshTokenRepository;
 import com.fatihsengun.repository.UserRepository;
@@ -40,7 +43,7 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
 
     public void deleteRefresh(User user) {
         RefreshToken refreshToken = refreshTokenRepository.findRefreshTokenByUserId(user.getId())
-                .orElseThrow(() -> new RuntimeException("Refresh Token Not Found"));
+                .orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "Refresh token not found: ")));
 
         refreshTokenRepository.delete(refreshToken);
 
@@ -54,10 +57,10 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
     public DtoRefreshToken refreshToken(DtoRefreshTokenUI dtoRefreshTokenUI) {
         RefreshToken refresh = refreshTokenRepository
                 .findRefreshTokenByRefreshToken(dtoRefreshTokenUI.getRefreshToken())
-                .orElseThrow(() -> new RuntimeException("Token Not Found"));
+                .orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "Token not found: ")));
 
         if (isRefreshTokenExpired(refresh.getExpireDate())) {
-            throw new RuntimeException("Token Expired");
+            throw new BaseException(new ErrorMessage(MessageType.TOKEN_EXPIRED, "Token Expired"));
         }
         String accessToken = jwtService.generateToken(refresh.getUser());
         RefreshToken savedRefreshToken = saveRefreshToken(refresh.getUser());

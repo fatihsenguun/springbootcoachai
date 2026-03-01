@@ -4,6 +4,9 @@ import com.fatihsengun.dto.*;
 import com.fatihsengun.entity.RefreshToken;
 import com.fatihsengun.entity.User;
 import com.fatihsengun.enums.RoleType;
+import com.fatihsengun.exception.BaseException;
+import com.fatihsengun.exception.ErrorMessage;
+import com.fatihsengun.exception.MessageType;
 import com.fatihsengun.jwt.JwtService;
 import com.fatihsengun.mapper.IGlobalMapper;
 import com.fatihsengun.repository.RefreshTokenRepository;
@@ -57,14 +60,14 @@ public class AuthServiceImpl implements IAuthService {
                     new UsernamePasswordAuthenticationToken(dtoAuthenticateUI.getEmail(), dtoAuthenticateUI.getPassword());
             authenticationProvider.authenticate(auth);
             User user = userRepository.findByEmail(dtoAuthenticateUI.getEmail())
-                    .orElseThrow(() -> new RuntimeException("user not found"));
+                    .orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "User not Found")));
             String accessToken = jwtService.generateToken(user);
             RefreshToken refreshToken = refreshTokenService.saveRefreshToken(user);
             return new DtoAuthenticate(accessToken, refreshToken.getRefreshToken(), user.getFirstName(), user.getLastName(), user.getRole());
 
         } catch (Exception e) {
-            System.out.println("Username or password wrong");
+            throw new BaseException(new ErrorMessage(MessageType.GENERAL_EXCEPTION, "Wrong username or password : " + e.getMessage()));
         }
-        return null;
+
     }
 }

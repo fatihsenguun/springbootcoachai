@@ -1,5 +1,6 @@
 package com.fatihsengun.entity;
 
+import com.fatihsengun.handler.ApiError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ public class RootResponseEntity<T> {
 
     private boolean result;
 
-    private String errorMessage;
+    private ApiError<?> errorMessage;
 
     private T data;
 
@@ -25,7 +26,7 @@ public class RootResponseEntity<T> {
         return rootResponseEntity;
     }
 
-    public static <T> RootResponseEntity<T> error(String errorMessage) {
+    public static <T> RootResponseEntity<T> error(ApiError<?> errorMessage) {
         RootResponseEntity<T> rootResponseEntity = new RootResponseEntity<>();
         rootResponseEntity.setData(null);
         rootResponseEntity.setResult(false);

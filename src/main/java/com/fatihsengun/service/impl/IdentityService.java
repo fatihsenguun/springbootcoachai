@@ -1,6 +1,9 @@
 package com.fatihsengun.service.impl;
 
 import com.fatihsengun.entity.User;
+import com.fatihsengun.exception.BaseException;
+import com.fatihsengun.exception.ErrorMessage;
+import com.fatihsengun.exception.MessageType;
 import com.fatihsengun.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,7 @@ public class IdentityService {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         System.out.println(email);
         return authRepository.findByEmail(email).orElseThrow(() ->
-                new RuntimeException("User Not found" + email));
+                new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "User not Found: " + email)));
     }
 
 }

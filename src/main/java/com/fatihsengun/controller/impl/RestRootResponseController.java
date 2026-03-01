@@ -1,6 +1,7 @@
 package com.fatihsengun.controller.impl;
 
 import com.fatihsengun.entity.RootResponseEntity;
+import com.fatihsengun.handler.ApiError;
 
 public class RestRootResponseController {
 
@@ -9,7 +10,7 @@ public class RestRootResponseController {
         return RootResponseEntity.ok(payload);
     }
 
-    public <T> RootResponseEntity<T> error(String error) {
+    public <T> RootResponseEntity<T> error(ApiError<?> error) {
         return RootResponseEntity.error(error);
     }
 

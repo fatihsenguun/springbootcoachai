@@ -13,7 +13,7 @@ public class SetLog extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "excercise_id", nullable = false)
-    private Excercise excercise;
+    private Exercise exercise;
 
     private Integer setNumber;
 

@@ -1,9 +1,6 @@
 package com.fatihsengun.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -11,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
 public class FitnessProfile extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)

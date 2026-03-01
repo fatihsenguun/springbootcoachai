@@ -9,19 +9,24 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Exercise extends BaseEntity{
+public class Exercise extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "session_id",nullable = false)
+    @JoinColumn(name = "session_id", nullable = false)
     private WorkoutSession workoutSession;
 
     private String name;
 
+
     private Integer targetSets;
+
     private Integer targetReps;
 
     @Column(name = "target_weight_kg")
-    private Double tagetWeightKg;
+    private Double targetWeightKg;
+
+    @Column(name = "start_weight_kg")
+    private Double startWeightKg;
 
     private Integer restDurationSeconds;
 

@@ -7,5 +7,7 @@ public interface IWorkoutProgramService {
 
     public DtoWorkoutProgram generateAndSaveProgram(DtoGenerateProgram dtoGenerateProgram);
 
+    public DtoWorkoutProgram getMyProgram();
+
 
 }

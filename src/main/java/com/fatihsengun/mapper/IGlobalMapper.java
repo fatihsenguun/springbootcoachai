@@ -1,10 +1,7 @@
 package com.fatihsengun.mapper;
 
 import com.fatihsengun.dto.*;
-import com.fatihsengun.entity.Exercise;
-import com.fatihsengun.entity.FitnessProfile;
-import com.fatihsengun.entity.User;
-import com.fatihsengun.entity.WorkoutSession;
+import com.fatihsengun.entity.*;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
@@ -23,6 +20,10 @@ public interface IGlobalMapper {
     DtoWorkoutSession toDtoWorkoutSession(WorkoutSession workoutSession);
 
     WorkoutSession toEntityWorkoutSession(DtoWorkoutSessionUI dtoWorkoutSessionUI);
+
+    WorkoutProgram toEntityWorkoutProgram(DtoWorkoutProgram dtoWorkoutProgram);
+
+    DtoWorkoutProgram toDtoWorkoutProgram(WorkoutProgram workoutProgram);
 
 
 }

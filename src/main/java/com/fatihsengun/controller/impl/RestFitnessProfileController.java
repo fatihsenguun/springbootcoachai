@@ -6,10 +6,7 @@ import com.fatihsengun.dto.DtoFitnessProfileUI;
 import com.fatihsengun.entity.RootResponseEntity;
 import com.fatihsengun.service.impl.FitnessProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/fitness_profile")
@@ -20,7 +17,7 @@ public class RestFitnessProfileController extends RestRootResponseController imp
 
     @Override
     @PostMapping("/save")
-    public RootResponseEntity<DtoFitnessProfile> save(DtoFitnessProfileUI dtoFitnessProfileUI) {
+    public RootResponseEntity<DtoFitnessProfile> save(@RequestBody DtoFitnessProfileUI dtoFitnessProfileUI) {
         return ok(fitnessProfileService.save(dtoFitnessProfileUI));
     }
 

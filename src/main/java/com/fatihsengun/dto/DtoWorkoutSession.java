@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class DtoWorkoutSession {
 
-    private WorkoutProgram workoutProgram;
 
     private Integer dayNumber;
 

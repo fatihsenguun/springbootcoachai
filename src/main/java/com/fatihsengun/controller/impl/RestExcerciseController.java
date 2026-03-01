@@ -7,6 +7,7 @@ import com.fatihsengun.entity.RootResponseEntity;
 import com.fatihsengun.service.impl.ExerciseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class RestExcerciseController extends RestRootResponseController implemen
 
     @Override
     @PostMapping("/save")
-    public RootResponseEntity<DtoExercise> save(DtoExerciseUI dtoExerciseUI) {
+    public RootResponseEntity<DtoExercise> save(@RequestBody DtoExerciseUI dtoExerciseUI) {
         return ok(exerciseService.save(dtoExerciseUI));
     }
 }

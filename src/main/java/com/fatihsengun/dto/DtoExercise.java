@@ -11,15 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DtoExercise {
 
-    private DtoWorkoutSession dtoWorkoutSession;
-
     private String name;
 
     private Integer targetSets;
 
     private Integer targetReps;
 
-    private Double tagetWeightKg;
+    private Double startWeightKg;
+
+    private Double targetWeightKg;
 
     private Integer restDurationSeconds;
 }

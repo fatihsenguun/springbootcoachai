@@ -7,6 +7,7 @@ import com.fatihsengun.entity.RootResponseEntity;
 import com.fatihsengun.service.impl.WorkoutSessionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class RestWorkoutSessionController extends RestRootResponseController imp
 
     @Override
     @PostMapping("/save")
-    public RootResponseEntity<DtoWorkoutSession> save(DtoWorkoutSessionUI dtoWorkoutSessionUI) {
+    public RootResponseEntity<DtoWorkoutSession> save(@RequestBody DtoWorkoutSessionUI dtoWorkoutSessionUI) {
         return ok(workoutSessionService.save(dtoWorkoutSessionUI));
     }
 }

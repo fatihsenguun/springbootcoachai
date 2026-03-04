@@ -22,6 +22,9 @@ public class WorkoutSession extends BaseEntity {
 
     private String name;
 
+    @Column(columnDefinition = "TEXT")
+    private String smallTips;
+
     private boolean isCompleted;
 
     @OneToMany(mappedBy = "workoutSession", cascade = CascadeType.ALL, orphanRemoval = true)

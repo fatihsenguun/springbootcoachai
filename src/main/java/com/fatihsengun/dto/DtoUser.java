@@ -20,4 +20,6 @@ public class DtoUser extends BaseEntity {
     private String lastName;
 
     private RoleType role;
+
+    private boolean isOnboardingCompleted;
 }

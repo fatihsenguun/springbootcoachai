@@ -23,5 +23,7 @@ public class DtoWorkoutSession {
 
     private boolean isCompleted;
 
+    private String smallTips;
+
     private List<DtoExercise> exercises = new ArrayList<>();
 }

@@ -36,6 +36,8 @@ public class User extends BaseEntity implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private FitnessProfile fitnessProfile;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean isOnboardingCompleted;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

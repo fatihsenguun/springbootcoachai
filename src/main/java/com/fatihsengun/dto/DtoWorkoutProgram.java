@@ -20,7 +20,6 @@ public class DtoWorkoutProgram {
 
     private String name;
 
-    private String aiGeneratedAdvice;
 
     private LocalDate startDate;
 

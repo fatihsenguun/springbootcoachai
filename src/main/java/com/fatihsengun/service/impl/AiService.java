@@ -22,28 +22,24 @@ public class AiService {
 
         String userPrompt = String.format(
                 "--- USER PROFILE ---\n" +
-                        "Age: %d\n" +
-                        "Body Weight: %.1f kg\n" +
-                        "Height: %.1f cm\n" +
-                        "Sports & Training Experience: %s\n" +
-                        "Primary Goal: %s\n\n" +
+                        "Age: %d\n" + // 1. Matches profile.getAge() (int)
+                        "Body Weight: %.1f kg\n" + // 2. Matches profile.getWeightKg() (Double)
+                        "Height: %.1f cm\n" + // 3. Matches profile.getHeightCm() (Double)
+                        "Sports & Training Experience: %s\n" + // 4. Matches profile.getSportsHistory() (String)
+                        "Primary Goal: %s\n\n" + // 5. Matches profile.getCurrentGoal() (String)
                         "--- CURRENT REQUEST ---\n" +
-                        "Training Frequency: %d days per week\n" +
-                        "Available Equipment: %s\n" +
-                        "Specific Focus: %s\n\n" +
+                        "Training Frequency: %d days per week\n" + // 6. Matches request.getDaysPerWeek() (int)
+                        "Available Equipment: %s\n" + // 7. Matches request.getEquipmentAvailable() (String)
+                        "Specific Focus: %s\n\n" + // 8. Matches request.getSpecificFocus() (String)
                         "--- MASTER PROGRAMMING RULES ---\n" +
-                        "1. SCIENTIFIC GOAL ALIGNMENT:\n" +
-                        "   - Strength: 3-5 sets, 3-6 reps, 120-180s rest. Focus on heavy compound multi-joint movements.\n" +
-                        "   - Hypertrophy (Muscle Building): 3-4 sets, 8-12 reps, 60-90s rest. Focus on time-under-tension and isolation.\n" +
-                        "   - Fat Loss/Conditioning: 3-4 sets, 12-20 reps, 30-45s rest. Focus on metabolic circuits, supersets, and active recovery.\n" +
-                        "2. SESSION ANATOMY & NAMING: Provide a descriptive 'name' for every session. Every session MUST start with the heaviest compound movement, followed by accessory work, and ending with isolation.\n" +
-                        "3. PROGRAM STRUCTURE & SPLIT: UNLESS 'Full Body' is requested, use a classic split: S1: Chest/Triceps, S2: Back/Biceps, S3: Legs/Shoulders. Repeat or adjust based on Frequency.\n" +
-                        "4. INTELLIGENT LOAD & PROGRESSIVE OVERLOAD (CRITICAL):\n" +
-                        "   - startWeightKg: Calculate based on 'Body Weight' and 'Experience'. (e.g., 80kg intermediate male = 60kg Squat).\n" +
-                        "   - targetWeightKg: This MUST represent the goal for the end of the 4-week program. It MUST NOT be equal to startWeightKg.\n" +
-                        "   - CALCULATE: For Compound movements (Squat, Bench, Row), targetWeightKg = startWeightKg + (5 to 10 kg). For Isolation movements (Curls, Lateral Raises), targetWeightKg = startWeightKg + (2.5 to 5 kg).\n" +
-                        "5. STRICT EQUIPMENT ADHERENCE: Only use exercises possible with: %s. No listed equipment = No exercise.\n" +
-                        "6. PSYCHOLOGICAL COACHING: Write 3 sentences: 1. Acknowledge their sports history. 2. Explain the science of this split. 3. A high-energy closing.\n",
+                        // ... (Rules 1-4)
+                        "5. STRICT EQUIPMENT ADHERENCE: Only use exercises possible with: %s. No listed equipment = No exercise.\n" + // 9. Matches request.getEquipmentAvailable() (String)
+                        "6. SESSION-SPECIFIC COACHING (CRITICAL): \n" +
+                        "   - For every 'smallTips' field, write exactly 3 sentences:\n" +
+                        "   - Sentence 1: Give a high-level tactical cue for the FIRST compound movement in this specific session.\n" +
+                        "   - Sentence 2: Explain the hypertrophy benefit of the isolation work listed in THIS session.\n" +
+                        "   - Sentence 3: A 1-sentence motivational closing that mentions the specific muscle group.\n" +
+                        "   - PROHIBITION: Do NOT repeat the same tips across different sessions.",
                 profile.getAge(),
                 profile.getWeightKg(),
                 profile.getHeightCm(),

@@ -21,4 +21,6 @@ public class DtoAuthenticate {
     public String lastName;
 
     public RoleType role;
+
+    private boolean isOnboardingCompleted;
 }

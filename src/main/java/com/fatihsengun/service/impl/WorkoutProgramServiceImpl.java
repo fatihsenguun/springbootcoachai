@@ -1,14 +1,12 @@
 package com.fatihsengun.service.impl;
 
-import com.fatihsengun.dto.DtoExercise;
-import com.fatihsengun.dto.DtoGenerateProgram;
-import com.fatihsengun.dto.DtoWorkoutProgram;
-import com.fatihsengun.dto.DtoWorkoutSession;
+import com.fatihsengun.dto.*;
 import com.fatihsengun.entity.*;
 import com.fatihsengun.exception.BaseException;
 import com.fatihsengun.exception.ErrorMessage;
 import com.fatihsengun.exception.MessageType;
 import com.fatihsengun.mapper.IGlobalMapper;
+import com.fatihsengun.repository.UserRepository;
 import com.fatihsengun.repository.WorkoutProgramRepository;
 import com.fatihsengun.service.IWorkoutProgramService;
 import org.checkerframework.checker.units.qual.A;
@@ -32,6 +30,9 @@ public class WorkoutProgramServiceImpl implements IWorkoutProgramService {
     private AiService aiService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private WorkoutProgramRepository workoutProgramRepository;
 
     @Autowired
@@ -40,35 +41,54 @@ public class WorkoutProgramServiceImpl implements IWorkoutProgramService {
 
     public void deactivateOtherPrograms(UUID userId) {
         Optional<WorkoutProgram> activeProgram = workoutProgramRepository.findByUserIdAndIsActiveTrue(userId);
-
+        workoutProgramRepository.deactivateAllByUserId(userId);
         if (activeProgram.isPresent()) {
             activeProgram.get().setActive(false);
             workoutProgramRepository.save(activeProgram.get());
         }
     }
 
+    @Override
+    @Transactional
+    public User updateUserProfile(DtoFitnessProfileUI dtoFitnessProfileUI) {
+        User user = identityService.getCurrentUser();
+
+        FitnessProfile profile = user.getFitnessProfile();
+
+        if (profile == null) {
+            profile = new FitnessProfile();
+            profile.setUser(user);
+            user.setFitnessProfile(profile);
+        }
+
+        profile.setWeightKg(dtoFitnessProfileUI.getWeightKg());
+        profile.setHeightCm(dtoFitnessProfileUI.getHeightCm());
+        profile.setAge(dtoFitnessProfileUI.getAge());
+        profile.setCurrentGoal(dtoFitnessProfileUI.getCurrentGoal());
+
+        user.setOnboardingCompleted(true);
+        deactivateOtherPrograms(user.getId());
+
+        return userRepository.save(user);
+
+    }
 
     @Override
     @Transactional
     public DtoWorkoutProgram generateAndSaveProgram(DtoGenerateProgram dtoGenerateProgram) {
-
         User user = identityService.getCurrentUser();
-        FitnessProfile profile = user.getFitnessProfile();
+        user.setOnboardingCompleted(true);
+        User savedUser = userRepository.save(user);
+        deactivateOtherPrograms(savedUser.getId());
 
-        deactivateOtherPrograms(user.getId());
+        FitnessProfile fitnessProfile = savedUser.getFitnessProfile();
 
-
-        if (profile == null) {
-            throw new BaseException(new ErrorMessage(MessageType.GENERAL_EXCEPTION, "You must create fitness prifle before"));
-        }
-        DtoWorkoutProgram aiGeneratedDto = aiService.askAiForWorkout(profile, dtoGenerateProgram);
-
+        DtoWorkoutProgram aiGeneratedDto = aiService.askAiForWorkout(fitnessProfile, dtoGenerateProgram);
         WorkoutProgram program = globalMapper.toEntityWorkoutProgram(aiGeneratedDto);
 
-        program.setUser(user);
+        program.setUser(savedUser);
         program.setActive(true);
         program.setStartDate(LocalDate.now());
-        program.setAiGeneratedAdvice(aiGeneratedDto.getAiGeneratedAdvice());
         program.setEndDate(LocalDate.now().plusWeeks(4));
 
         program.getSessions().forEach(session -> {

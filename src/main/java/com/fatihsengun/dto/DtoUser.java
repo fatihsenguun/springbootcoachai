@@ -1,6 +1,7 @@
 package com.fatihsengun.dto;
 
 import com.fatihsengun.entity.BaseEntity;
+import com.fatihsengun.entity.FitnessProfile;
 import com.fatihsengun.enums.RoleType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -22,4 +23,5 @@ public class DtoUser extends BaseEntity {
     private RoleType role;
 
     private boolean isOnboardingCompleted;
+
 }

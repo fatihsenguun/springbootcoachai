@@ -63,8 +63,7 @@ public class AuthServiceImpl implements IAuthService {
                     .orElseThrow(() -> new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, "User not Found")));
             String accessToken = jwtService.generateToken(user);
             RefreshToken refreshToken = refreshTokenService.saveRefreshToken(user);
-            return new DtoAuthenticate(accessToken, refreshToken.getRefreshToken(), user.getFirstName(), user.getLastName(), user.getRole()
-                    , user.isOnboardingCompleted());
+            return new DtoAuthenticate(accessToken, refreshToken.getRefreshToken());
 
         } catch (Exception e) {
             throw new BaseException(new ErrorMessage(MessageType.GENERAL_EXCEPTION, "Wrong username or password : " + e.getMessage()));

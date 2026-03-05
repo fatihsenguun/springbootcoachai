@@ -25,6 +25,7 @@ public class FitnessProfileService implements IFitnessProfileService {
     @Override
     public DtoFitnessProfile save(DtoFitnessProfileUI dtoFitnessProfileUI) {
         User user = identityService.getCurrentUser();
+        user.setOnboardingCompleted(true);
         FitnessProfile fitnessProfile = globalMapper.toEntityFitnessProfile(dtoFitnessProfileUI);
         fitnessProfile.setUser(user);
 

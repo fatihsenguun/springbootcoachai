@@ -1,5 +1,6 @@
 package com.fatihsengun.dto;
 
+import com.fatihsengun.entity.FitnessProfile;
 import com.fatihsengun.enums.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,11 +17,5 @@ public class DtoAuthenticate {
 
     public String refreshToken;
 
-    public String firstName;
 
-    public String lastName;
-
-    public RoleType role;
-
-    private boolean isOnboardingCompleted;
 }

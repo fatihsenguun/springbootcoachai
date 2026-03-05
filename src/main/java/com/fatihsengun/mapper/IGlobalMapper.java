@@ -25,5 +25,7 @@ public interface IGlobalMapper {
 
     DtoWorkoutProgram toDtoWorkoutProgram(WorkoutProgram workoutProgram);
 
+    DtoUser toDtoUser(User user);
+
 
 }

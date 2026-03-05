@@ -7,4 +7,6 @@ import java.util.UUID;
 public interface IUserService {
 
     public DtoUser findUserById(UUID id);
+
+    public DtoUser getUser();
 }

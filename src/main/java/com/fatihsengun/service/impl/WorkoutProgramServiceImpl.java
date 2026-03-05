@@ -77,7 +77,6 @@ public class WorkoutProgramServiceImpl implements IWorkoutProgramService {
     @Transactional
     public DtoWorkoutProgram generateAndSaveProgram(DtoGenerateProgram dtoGenerateProgram) {
         User user = identityService.getCurrentUser();
-        user.setOnboardingCompleted(true);
         User savedUser = userRepository.save(user);
         deactivateOtherPrograms(savedUser.getId());
 

@@ -8,4 +8,6 @@ public interface
 IRestWorkoutProgramController {
 
     public RootResponseEntity<DtoWorkoutProgram> generateProgram(DtoGenerateProgram dtoGenerateProgram);
+
+    public RootResponseEntity<DtoWorkoutProgram> getMyProgram();
 }

@@ -1,9 +1,12 @@
 package com.fatihsengun.dto;
 
+import com.fatihsengun.enums.DayType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,7 +15,9 @@ import lombok.Setter;
 public class DtoGenerateProgram {
 
     private Integer daysPerWeek;
-    private String equipmentAvailable;// e.g., "Full Gym", "Dumbbells Only", "Bodyweight"
-    private String specificFocus;// e.g., "Build chest", "Lose belly fat"
+    private String equipmentAvailable;
+    private String specificFocus;
+
+    private List<DayType> trainingDays;
 
 }

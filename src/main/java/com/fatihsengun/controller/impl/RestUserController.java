@@ -2,6 +2,7 @@ package com.fatihsengun.controller.impl;
 
 import com.fatihsengun.controller.IRestUserController;
 import com.fatihsengun.dto.DtoUser;
+import com.fatihsengun.entity.RootResponseEntity;
 import com.fatihsengun.service.IUserService;
 import com.fatihsengun.service.impl.UserServiceImpl;
 import org.checkerframework.checker.units.qual.A;
@@ -20,7 +21,7 @@ public class RestUserController extends RestRootResponseController implements IR
 
     @Override
     @GetMapping()
-    public DtoUser getUser() {
-        return userService.getUser();
+    public RootResponseEntity<DtoUser> getUser() {
+        return ok(userService.getUser());
     }
 }

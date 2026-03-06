@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class DtoWorkoutSession {
     private boolean isCompleted;
 
     private String smallTips;
+
+    private LocalDate scheduledDate;
 
     private List<DtoExercise> exercises = new ArrayList<>();
 }

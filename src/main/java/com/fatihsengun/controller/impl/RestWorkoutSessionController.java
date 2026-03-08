@@ -6,13 +6,12 @@ import com.fatihsengun.dto.DtoWorkoutSessionUI;
 import com.fatihsengun.entity.RootResponseEntity;
 import com.fatihsengun.service.impl.WorkoutSessionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/controller")
+@RequestMapping("/session")
 public class RestWorkoutSessionController extends RestRootResponseController implements IRestWorkoutSessionController {
 
 
@@ -23,5 +22,11 @@ public class RestWorkoutSessionController extends RestRootResponseController imp
     @PostMapping("/save")
     public RootResponseEntity<DtoWorkoutSession> save(@RequestBody DtoWorkoutSessionUI dtoWorkoutSessionUI) {
         return ok(workoutSessionService.save(dtoWorkoutSessionUI));
+    }
+
+    @Override
+    @GetMapping("/set_completed")
+    public RootResponseEntity<DtoWorkoutSession> setCompleted(@RequestParam(name = "id") UUID id) {
+        return ok(workoutSessionService.setCompleted(id));
     }
 }

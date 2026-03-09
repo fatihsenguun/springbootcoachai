@@ -11,7 +11,8 @@ public enum MessageType {
 
     NO_RECORD_EXIST("1001", "No Record Exist!"),
     GENERAL_EXCEPTION("9999", "A General Error Occured"),
-    TOKEN_EXPIRED("1002", "Token Expired!");
+    TOKEN_EXPIRED("1002", "Token Expired!"),
+    TOO_MANY_REQUESTS("1003", "Too Many Requests");
 
     private String code;
 

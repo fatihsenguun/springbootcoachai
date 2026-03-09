@@ -4,6 +4,7 @@ import com.fatihsengun.entity.RootResponseEntity;
 import com.fatihsengun.exception.BaseException;
 import com.fatihsengun.exception.ErrorMessage;
 import com.fatihsengun.exception.MessageType;
+import com.fatihsengun.exception.RateLimitException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,13 @@ public class GlobalExceptionHandler extends RootResponseEntity {
     public GlobalExceptionHandler(HttpServletResponse httpServletResponse) {
         this.httpServletResponse = httpServletResponse;
     }
+
+    @ExceptionHandler(value = RateLimitException.class)
+    public ResponseEntity<RootResponseEntity<ApiError<?>>> handleRateLimitingException(RateLimitException exception, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(error(createApiError(exception.getMessage(), request, HttpStatus.TOO_MANY_REQUESTS.value())));
+    }
+
 
     @ExceptionHandler(value = AccessDeniedException.class)
     public ResponseEntity<RootResponseEntity<ApiError<?>>> handleAccessDeniedException(BaseException exception, WebRequest request) {

@@ -21,11 +21,12 @@ public class FitnessProfile extends BaseEntity {
     @Column(name = "height_cm")
     private Double heightCm;
 
+    @Column(nullable = false)
     private Integer age;
 
     @Column(name = "sports_history", columnDefinition = "TEXT")
     private String sportsHistory;
 
-    @Column(name = "current_goal")
+    @Column(name = "current_goal", length = 100)
     private String currentGoal;
 }

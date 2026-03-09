@@ -5,6 +5,7 @@ import com.fatihsengun.dto.DtoGenerateProgram;
 import com.fatihsengun.dto.DtoWorkoutProgram;
 import com.fatihsengun.entity.RootResponseEntity;
 import com.fatihsengun.service.impl.WorkoutProgramServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class RestWorkoutProgramControllerImpl extends RestRootResponseController
 
     @Override
     @PostMapping("/generate")
-    public RootResponseEntity<DtoWorkoutProgram> generateProgram(@RequestBody DtoGenerateProgram dtoGenerateProgram) {
+    public RootResponseEntity<DtoWorkoutProgram> generateProgram(@Valid @RequestBody DtoGenerateProgram dtoGenerateProgram) {
         return ok(workoutProgramService.generateAndSaveProgram(dtoGenerateProgram));
     }
 

@@ -1,5 +1,6 @@
 package com.fatihsengun.dto;
 
+import com.fatihsengun.entity.BaseEntity;
 import com.fatihsengun.entity.Exercise;
 import com.fatihsengun.entity.WorkoutProgram;
 import lombok.AllArgsConstructor;
@@ -16,10 +17,10 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DtoWorkoutSession {
+public class DtoWorkoutSession  {
 
-    private UUID id;
 
+    private String id;
     private Integer dayNumber;
 
     private String name;
